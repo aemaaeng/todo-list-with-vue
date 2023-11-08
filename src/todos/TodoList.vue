@@ -4,14 +4,18 @@ import AddTodo from "./components/AddTodo.vue";
 import TodoItem from "./components/TodoItem.vue";
 const isAddingTodo = ref(false);
 
-const todos = ref(JSON.parse(localStorage.getItem("todos") || "[]"));
+const todos = ref(
+  JSON.parse(localStorage.getItem("todos"))?.sort(
+    (a, b) => new Date(b.date) - new Date(a.date)
+  ) || []
+);
 
 function toggle() {
   isAddingTodo.value = !isAddingTodo.value;
 }
 
 function addTodo(todo) {
-  todos.value.push(todo);
+  todos.value.unshift(todo);
 }
 
 watchEffect(() => {

@@ -47,6 +47,7 @@ watchEffect(() => {
   border: 2px solid black;
   border-radius: 5px;
   color: white;
+  padding-bottom: 3px;
 }
 
 #addTodo:hover {

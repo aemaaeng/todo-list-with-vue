@@ -3,15 +3,56 @@ import { ref } from "vue";
 import DatePicker from "@vuepic/vue-datepicker";
 import "@vuepic/vue-datepicker/dist/main.css";
 
-const emit = defineEmits(["cancel-submit"]);
+const emit = defineEmits(["todo-submit", "switch-toggle"]);
 
 function handleCancelSubmit() {
-  emit("cancel-submit");
+  emit("switch-toggle");
+}
+
+function handleTodoSubmit() {
+  const newTodo = {
+    title: todoTitle.value,
+    content: todoDesc.value,
+    date: todoDate.value,
+    status: todoStatus.value,
+  };
+
+  if (
+    todoTitle.value.trim().length === 0 ||
+    todoDesc.value.trim().length === 0
+  ) {
+    window.alert("내용을 입력하세요.");
+    return;
+  }
+
+  if (todoStatus.value === "none") {
+    window.alert("상태를 설정해주세요.");
+    return;
+  }
+
+  if (todoDate.value === null) {
+    window.alert("날짜를 설정해주세요.");
+    return;
+  }
+
+  emit("todo-submit", newTodo);
+
+  todoTitle.value = "";
+  todoDesc.value = "";
+  emit("switch-toggle");
 }
 
 const todoTitle = ref("");
 const todoDesc = ref("");
 const todoDate = ref(new Date());
+const todoStatus = ref("none");
+
+const options = ref([
+  { text: "--선택--", value: "none" },
+  { text: "진행 전", value: "todo" },
+  { text: "진행 중", value: "inProgress" },
+  { text: "완료", value: "done" },
+]);
 
 function format(date) {
   const day = date.getDate();
@@ -23,9 +64,18 @@ function format(date) {
 </script>
 
 <template>
-  <form class="addTodoForm" @submit.prevent="">
-    <input v-model="todoTitle" placeholder="할 일을 입력하세요." />
-    <textarea v-model="todoDesc" placeholder="설명을 입력하세요." />
+  <form id="addTodoForm" @submit.prevent="handleTodoSubmit">
+    <input
+      name="todoTitle"
+      v-model="todoTitle"
+      type="text"
+      placeholder="할 일을 입력하세요."
+    />
+    <textarea
+      name="todoDesc"
+      v-model="todoDesc"
+      placeholder="설명을 입력하세요."
+    />
     <div class="todoInfoContainer">
       <DatePicker
         v-model="todoDate"
@@ -34,11 +84,10 @@ function format(date) {
         :format="format"
         :preview-format="format"
       />
-      <select class="todoStateOptions">
-        <option>선택</option>
-        <option>진행 전</option>
-        <option>진행 중</option>
-        <option>완료</option>
+      <select class="todoStateOptions" v-model="todoStatus">
+        <option v-for="option in options" :value="option.value">
+          {{ option.text }}
+        </option>
       </select>
     </div>
     <div class="todoButtonContainer">
@@ -55,7 +104,7 @@ function format(date) {
 </template>
 
 <style scoped>
-.addTodoForm {
+#addTodoForm {
   border: 2px solid black;
   padding: 20px 30px;
   border-radius: 5px;

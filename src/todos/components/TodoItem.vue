@@ -5,7 +5,7 @@ const props = defineProps({
     id: String,
     title: String,
     content: String,
-    date: Date,
+    date: String,
     status: String,
   },
 });
@@ -60,6 +60,7 @@ const props = defineProps({
 }
 
 .todoDesc {
+  color: grey;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;

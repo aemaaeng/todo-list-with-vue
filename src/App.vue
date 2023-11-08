@@ -37,6 +37,19 @@ h1 {
 nav {
   display: flex;
   justify-content: space-around;
+  align-items: center;
+  font-size: 1.1rem;
+  margin-bottom: 30px;
+}
+
+nav > a {
+  padding: 10px 40px;
+  border-bottom: 2px solid white;
+}
+
+.router-link-active {
+  font-weight: 600;
+  border-bottom: 2px solid black;
 }
 
 main {

@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from "vue";
+import { ref, watchEffect } from "vue";
 import AddTodo from "./components/AddTodo.vue";
 const isAddingTodo = ref(false);
 
@@ -12,6 +12,10 @@ function toggle() {
 function addTodo(todo) {
   todos.value.push(todo);
 }
+
+watchEffect(() => {
+  localStorage.setItem("todos", JSON.stringify(todos.value));
+});
 </script>
 
 <template>

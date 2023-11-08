@@ -1,4 +1,5 @@
 <script setup>
+import parseDate from "../../utils/parseDate";
 const props = defineProps({
   todo: {
     id: String,
@@ -14,7 +15,7 @@ const props = defineProps({
   <li class="todoItem">
     <div class="titleContainer">
       <h3 class="todoTitle">{{ todo.title }}</h3>
-      <div class="todoDate">{{ todo.date }}</div>
+      <div class="todoDate">{{ parseDate(todo.date) }}</div>
     </div>
     <div class="infoContainer">
       <div>{{ todo.content }}</div>
@@ -45,6 +46,7 @@ const props = defineProps({
 
 .todoDate {
   font-size: 0.9rem;
+  color: grey;
 }
 
 .infoContainer {

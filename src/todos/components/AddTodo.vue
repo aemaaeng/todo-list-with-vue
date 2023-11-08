@@ -3,6 +3,12 @@ import { ref } from "vue";
 import DatePicker from "@vuepic/vue-datepicker";
 import "@vuepic/vue-datepicker/dist/main.css";
 
+const emit = defineEmits(["cancel-submit"]);
+
+function handleCancelSubmit() {
+  emit("cancel-submit");
+}
+
 const todoTitle = ref("");
 const todoDesc = ref("");
 const todoDate = ref(new Date());
@@ -17,7 +23,7 @@ function format(date) {
 </script>
 
 <template>
-  <form class="addTodoForm">
+  <form class="addTodoForm" @submit.prevent="">
     <input v-model="todoTitle" placeholder="할 일을 입력하세요." />
     <textarea v-model="todoDesc" placeholder="설명을 입력하세요." />
     <div class="todoInfoContainer">
@@ -36,8 +42,14 @@ function format(date) {
       </select>
     </div>
     <div class="todoButtonContainer">
-      <button class="todoSubmit">추가</button>
-      <button class="todoSubmit cancel">취소</button>
+      <button class="todoSubmit" type="submit">추가</button>
+      <button
+        class="todoSubmit cancel"
+        type="button"
+        @click="handleCancelSubmit"
+      >
+        취소
+      </button>
     </div>
   </form>
 </template>

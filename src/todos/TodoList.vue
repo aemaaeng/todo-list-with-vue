@@ -11,7 +11,7 @@ function toggle() {
 <template>
   <div id="wrapper">
     <div v-if="isAddingTodo">
-      <AddTodo />
+      <AddTodo @cancel-submit="toggle" />
     </div>
     <div v-else @click="toggle" id="addTodo">+</div>
   </div>

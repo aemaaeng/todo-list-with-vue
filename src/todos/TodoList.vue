@@ -26,7 +26,7 @@ watchEffect(() => {
     </div>
     <div v-else @click="toggle" id="addTodo">+</div>
     <ul>
-      <TodoItem />
+      <TodoItem v-for="todo in todos" :todo="todo" :key="todo.id" />
     </ul>
   </div>
 </template>
@@ -37,15 +37,18 @@ watchEffect(() => {
 }
 
 #addTodo {
-  border: 2px solid black;
+  background-color: black;
   text-align: center;
   font-size: 2rem;
+  border: 2px solid black;
   border-radius: 5px;
+  color: white;
 }
 
 #addTodo:hover {
-  background-color: black;
-  color: white;
+  border: 2px solid black;
+  background-color: white;
+  color: black;
   transition: 0.3s;
   cursor: pointer;
 }

@@ -3,6 +3,7 @@ import TodoList from "./todos/TodoList.vue";
 import AnalyticsPage from "./analytics/AnalyticsPage.vue";
 
 const routes = [
+  { path: "/", redirect: "/todos" },
   { path: "/todos", component: TodoList },
   { path: "/analytics", component: AnalyticsPage },
 ];

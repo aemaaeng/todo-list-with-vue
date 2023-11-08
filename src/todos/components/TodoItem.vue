@@ -18,7 +18,7 @@ const props = defineProps({
       <div class="todoDate">{{ parseDate(todo.date) }}</div>
     </div>
     <div class="infoContainer">
-      <div>{{ todo.content }}</div>
+      <div class="todoDesc">{{ todo.content }}</div>
       <div>{{ todo.status }}</div>
     </div>
   </li>
@@ -31,6 +31,7 @@ const props = defineProps({
   padding: 25px 30px;
   margin: 20px 0px;
 }
+
 .titleContainer {
   display: flex;
   justify-content: space-between;
@@ -41,7 +42,11 @@ const props = defineProps({
 .todoTitle {
   font-size: 1.3rem;
   font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
   margin: 0;
+  margin-right: 10px;
 }
 
 .todoDate {
@@ -52,5 +57,12 @@ const props = defineProps({
 .infoContainer {
   display: flex;
   justify-content: space-between;
+}
+
+.todoDesc {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-right: 40px;
 }
 </style>

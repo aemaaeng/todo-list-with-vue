@@ -22,6 +22,11 @@
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
 }
+
+input::placeholder,
+textarea::placeholder {
+  color: #bbb;
+}
 </style>
 
 <style scoped>

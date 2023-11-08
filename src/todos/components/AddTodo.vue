@@ -11,6 +11,7 @@ function handleCancelSubmit() {
 
 function handleTodoSubmit() {
   const newTodo = {
+    id: crypto.randomUUID(),
     title: todoTitle.value,
     content: todoDesc.value,
     date: todoDate.value,

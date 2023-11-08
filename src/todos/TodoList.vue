@@ -1,6 +1,7 @@
 <script setup>
 import { ref, watchEffect } from "vue";
 import AddTodo from "./components/AddTodo.vue";
+import TodoItem from "./components/TodoItem.vue";
 const isAddingTodo = ref(false);
 
 const todos = ref(JSON.parse(localStorage.getItem("todos") || "[]"));
@@ -19,21 +20,19 @@ watchEffect(() => {
 </script>
 
 <template>
-  <div id="wrapper">
+  <div id="addTodoWrapper">
     <div v-if="isAddingTodo">
       <AddTodo @switch-toggle="toggle" @todo-submit="addTodo" />
     </div>
     <div v-else @click="toggle" id="addTodo">+</div>
     <ul>
-      {{
-        todos
-      }}
+      <TodoItem />
     </ul>
   </div>
 </template>
 
 <style scoped>
-#wrapper {
+#addTodoWrapper {
   margin: 15px 90px;
 }
 
